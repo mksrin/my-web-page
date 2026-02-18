@@ -81,8 +81,10 @@
 </div>
 
 <section id="ai-news" class="news-section">
-  <h2 class="section-title">Stay On Top Of The Latest News(AI / Data Engineering)</h2>
-  <div id="news-container" class="news-grid"></div>
+  <h2 class="section-title">Stay On Top Of The Latest News</h2>
+  <div id="news-top3" class="news-grid"></div>
+
+  <div id="weekly-insight" class="weekly-insight-card"></div>
 </section>
 
 <style>
@@ -109,6 +111,7 @@
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 0 12px rgba(160, 32, 240, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .news-card h3 {
@@ -130,90 +133,37 @@
   .news-card a:hover {
     text-decoration: underline;
   }
+
+  .neon-animate:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 18px rgba(160, 32, 240, 0.6);
+  }
+
+  .weekly-insight-card {
+    margin-top: 30px;
+    background: #111;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #333;
+    box-shadow: 0 0 16px rgba(0, 229, 255, 0.3);
+  }
+
+  .weekly-insight-card h3 {
+    margin-top: 0;
+    color: #a020f0;
+  }
+
+  .weekly-insight-card p {
+    color: #ddd;
+  }
 </style>
 
-<script>
-// RSS feeds to pull from
-const feeds = [
-  "https://blog.google/technology/ai/rss/",
-  "https://openai.com/blog/rss/",
-  "https://huggingface.co/blog/feed.xml",
-  "https://databricks.com/feed",
-  "https://techcrunch.com/tag/artificial-intelligence/feed/",
-  "https://learn.microsoft.com/en-us/fabric/rss.xml"
-];
+<script type="module">
+  import { renderTopNews, renderWeeklyInsight } from "./assets/js/ai-news.js";
 
-// Hugging Face summarizer model (free)
-const HF_SUMMARY_API =
-  "https://api-inference.huggingface.co/models/facebook/bart-large-cnn";
-
-// Optional: Add your HF token for higher rate limits
-const HF_TOKEN = ""; // leave empty if not needed
-
-async function fetchRSS(url) {
-  const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
-  const res = await fetch(api);
-  return res.json();
-}
-
-async function summarize(text) {
-  const res = await fetch(HF_SUMMARY_API, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(HF_TOKEN && { Authorization: `Bearer ${HF_TOKEN}` })
-    },
-    body: JSON.stringify({ inputs: text })
-  });
-
-  const data = await res.json();
-  return data[0]?.summary_text || "Summary unavailable.";
-}
-
-async function loadAINews() {
-  const container = document.getElementById("news-container");
-  container.innerHTML = "<p style='color:#ccc'>Loading latest AI news...</p>";
-
-  let articles = [];
-
-  // Fetch from all feeds
-  for (const feed of feeds) {
-    try {
-      const data = await fetchRSS(feed);
-      if (data.items) {
-        articles.push(...data.items.slice(0, 3)); // take top 3 from each feed
-      }
-    } catch (e) {
-      console.error("RSS error:", e);
-    }
-  }
-
-  // Sort by date
-  articles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-
-  // Take top 3 overall
-  const top3 = articles.slice(0, 3);
-
-  container.innerHTML = "";
-
-  for (const article of top3) {
-    const summary = await summarize(article.description || article.title);
-
-    const card = document.createElement("div");
-    card.className = "news-card";
-
-    card.innerHTML = `
-      <h3>${article.title}</h3>
-      <p>${summary}</p>
-      <a href="${article.link}" target="_blank">Read more →</a>
-    `;
-
-    container.appendChild(card);
-  }
-}
-
-loadAINews();
-</script>
+  renderTopNews("news-top3");
+  renderWeeklyInsight("weekly-insight");
+</script>  
 <div class="footer">
   © 2026 Krishna Srinivasan — Data Engineering &amp; Analytics
 </div>
