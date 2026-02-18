@@ -1,116 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI News Aggregator</title>
+<title>AI News</title>
 
 <style>
 body {
   font-family: Arial, sans-serif;
   background: #f4f6f9;
-  margin: 0;
   padding: 20px;
 }
-
-h1 {
-  text-align: center;
-  color: #222;
-}
-
-.feed-container {
-  max-width: 1000px;
-  margin: auto;
-}
-
+h1 { text-align: center; }
 .feed {
   background: white;
-  margin-bottom: 30px;
   padding: 20px;
+  margin-bottom: 30px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
-
-.feed h2 {
-  margin-top: 0;
-  color: #1a73e8;
-}
-
 .article {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #eee;
-  padding: 12px 0;
 }
-
-.article:last-child {
-  border-bottom: none;
-}
-
+.article:last-child { border-bottom: none; }
 .article a {
   font-weight: bold;
-  color: #333;
   text-decoration: none;
-}
-
-.article a:hover {
   color: #1a73e8;
 }
-
 .date {
   font-size: 12px;
   color: gray;
 }
-
-.loading {
-  text-align: center;
-  font-size: 18px;
-}
 </style>
 </head>
-
 <body>
 
-<h1>AI News Feed</h1>
-<div class="feed-container" id="news"></div>
+<h1>AI News</h1>
+<div id="news">Loading feeds...</div>
 
 <script>
-const AI_NEWS_FEEDS = [
-  { name: "Google AI Blog", url: "https://blog.google/technology/ai/rss/" },
-  { name: "OpenAI Blog", url: "https://openai.com/blog/rss/" },
-  { name: "Hugging Face Blog", url: "https://huggingface.co/blog/feed.xml" },
-  { name: "Databricks Blog", url: "https://databricks.com/feed" },
+const FEEDS = [
+  { name: "Google AI", url: "https://blog.google/technology/ai/rss/" },
+  { name: "OpenAI", url: "https://openai.com/blog/rss/" },
+  { name: "Hugging Face", url: "https://huggingface.co/blog/feed.xml" },
+  { name: "Databricks", url: "https://databricks.com/feed" },
   { name: "TechCrunch AI", url: "https://techcrunch.com/tag/artificial-intelligence/feed/" },
   { name: "Microsoft Fabric", url: "https://learn.microsoft.com/en-us/fabric/rss.xml" }
 ];
 
-const proxy = "https://api.allorigins.win/raw?url=";
+const proxy = "https://corsproxy.io/?";
 
-async function fetchRSS(feed) {
+async function loadFeed(feed) {
   try {
     const response = await fetch(proxy + encodeURIComponent(feed.url));
     const xmlText = await response.text();
     const parser = new DOMParser();
     const xml = parser.parseFromString(xmlText, "text/xml");
 
-    const items = xml.querySelectorAll("item, entry");
+    const items = xml.querySelectorAll("item");
     const feedDiv = document.createElement("div");
     feedDiv.className = "feed";
     feedDiv.innerHTML = `<h2>${feed.name}</h2>`;
 
-    items.forEach((item, index) => {
-      if (index >= 5) return; // show only 5 articles per feed
+    items.forEach((item, i) => {
+      if (i >= 5) return;
 
-      const title = item.querySelector("title")?.textContent || "No title";
-      const link = item.querySelector("link")?.textContent || 
-                   item.querySelector("link")?.getAttribute("href") || "#";
-      const pubDate = item.querySelector("pubDate, updated")?.textContent || "";
-      const description = item.querySelector("description, summary")?.textContent || "";
+      const title = item.querySelector("title")?.textContent;
+      const link = item.querySelector("link")?.textContent;
+      const pubDate = item.querySelector("pubDate")?.textContent;
 
       const article = document.createElement("div");
       article.className = "article";
       article.innerHTML = `
         <a href="${link}" target="_blank">${title}</a>
-        <div class="date">${pubDate}</div>
-        <div>${description.substring(0, 200)}...</div>
+        <div class="date">${pubDate || ""}</div>
       `;
 
       feedDiv.appendChild(article);
@@ -118,12 +84,13 @@ async function fetchRSS(feed) {
 
     document.getElementById("news").appendChild(feedDiv);
 
-  } catch (error) {
-    console.error("Error loading feed:", feed.url, error);
+  } catch (err) {
+    console.error("Failed:", feed.url, err);
   }
 }
 
-AI_NEWS_FEEDS.forEach(fetchRSS);
+document.getElementById("news").innerHTML = "";
+FEEDS.forEach(loadFeed);
 </script>
 
 </body>
