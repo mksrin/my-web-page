@@ -28,10 +28,7 @@ async function renderFullNews() {
     card.innerHTML = `
       <h3>${article.title}</h3>
       <p>${summaryText}</p>
-      <small style="color:#888;">${new Date(
-        article.pubDate
-      ).toLocaleString()}</small><br/>
-      <a href="${article.link}" target="_blank">Read more →</a>
+      <small>${new Date(article.pubDate).toLocaleDateString()}</small>
     `;
 
     container.appendChild(card);
@@ -39,3 +36,4 @@ async function renderFullNews() {
 }
 
 renderFullNews();
+
