@@ -43,7 +43,7 @@ h1 { text-align: center; }
 
 <script>
 const FEEDS = [
-  { name: "Google AI", url: "https://blog.google/technology/ai/rss/" },
+  { name: "Google AI", url: "https://blog.google/innovation-and-ai/technology/ai/rss/" },
   { name: "OpenAI", url: "https://openai.com/blog/rss/" },
   { name: "Hugging Face", url: "https://huggingface.co/blog/feed.xml" },
   { name: "Databricks", url: "https://databricks.com/feed" },
@@ -51,47 +51,45 @@ const FEEDS = [
   { name: "Microsoft Fabric", url: "https://learn.microsoft.com/en-us/fabric/rss.xml" }
 ];
 
-const proxy = "https://corsproxy.io/?";
-
 async function loadFeed(feed) {
   try {
-    const response = await fetch(proxy + encodeURIComponent(feed.url));
-    const xmlText = await response.text();
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(xmlText, "text/xml");
+    const apiURL =
+      "https://api.rss2json.com/v1/api.json?rss_url=" +
+      encodeURIComponent(feed.url);
 
-    const items = xml.querySelectorAll("item");
+    const response = await fetch(apiURL);
+    const data = await response.json();
+
+    if (data.status !== "ok") {
+      console.error("Feed failed:", feed.name);
+      return;
+    }
+
     const feedDiv = document.createElement("div");
     feedDiv.className = "feed";
     feedDiv.innerHTML = `<h2>${feed.name}</h2>`;
 
-    items.forEach((item, i) => {
-      if (i >= 5) return;
-
-      const title = item.querySelector("title")?.textContent;
-      const link = item.querySelector("link")?.textContent;
-      const pubDate = item.querySelector("pubDate")?.textContent;
-
+    data.items.slice(0, 5).forEach(item => {
       const article = document.createElement("div");
       article.className = "article";
       article.innerHTML = `
-        <a href="${link}" target="_blank">${title}</a>
-        <div class="date">${pubDate || ""}</div>
+        <a href="${item.link}" target="_blank">${item.title}</a>
+        <div class="date">${item.pubDate}</div>
       `;
-
       feedDiv.appendChild(article);
     });
 
     document.getElementById("news").appendChild(feedDiv);
 
   } catch (err) {
-    console.error("Failed:", feed.url, err);
+    console.error("Error loading:", feed.name, err);
   }
 }
 
-document.getElementById("news").innerHTML = "";
 FEEDS.forEach(loadFeed);
 </script>
 
+
 </body>
 </html>
+
