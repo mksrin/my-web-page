@@ -45,7 +45,6 @@ function fallbackSummarize(text) {
 }
 
 // ---------- CORS‑FRIENDLY SUMMARIZER (OpenAI Responses API) ----------
-
 const OPENAI_API = "https://api.openai.com/v1/responses";
 const OPENAI_KEY = ""; // optional but recommended
 
@@ -76,7 +75,7 @@ function fallbackSummarize(text) {
   if (!text) return "Summary unavailable.";
 
   const sentences = text
-    .replace(/<[^>]+>/g, "") // remove HTML tags
+    .replace(/<[^>]+>/g, "")
     .split(/[.!?]/)
     .map(s => s.trim())
     .filter(Boolean);
