@@ -108,9 +108,6 @@ async function fetchRSS(url) {
   return res.json();
 }
 
-
-
-
 // ---------- HOMEPAGE: TOP 3 NEWS ----------
 
 export async function renderTopNews(containerId) {
