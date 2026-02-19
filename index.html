@@ -5,7 +5,7 @@
   <title>Krishna Srinivasan – Data Engineering & AI</title>
   <link rel="stylesheet" href="assets/css/main.css">
   <!-- In your HTML <head> or before </body> -->
-<script src="assets/js/ai-news.js"></script>
+
 </head>
 <body>
 <table width='100%'>
@@ -86,11 +86,9 @@
 
 </div>
 
-<section id="ai-news" class="news-section">
-  <h2 class="section-title">Stay On Top Of The Latest News</h2>
-  <div id="news-top3" class="news-grid"></div>
-
-  <div id="weekly-insight" class="weekly-insight-card"></div>
+<section class="latest-news">
+  <h2 class="latest-news-title">Stay On Top Of The Latest News</h2>
+  <div id="top-news" class="latest-news-grid"></div>
 </section>
 
 <style>
@@ -167,7 +165,7 @@
 <script type="module">
   import { renderTopNews, renderWeeklyInsight } from "./assets/js/ai-news.js";
 
-  renderTopNews("news-top3");
+  renderTopNews("top-news");
   renderWeeklyInsight("weekly-insight");
 </script>  
 <div class="footer">
