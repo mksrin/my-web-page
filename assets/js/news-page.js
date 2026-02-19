@@ -1,5 +1,3 @@
-import { renderTopNews } from "./ai-news.js";
-
 async function renderFullNews() {
   const container = document.getElementById("news-list");
   if (!container) return;
@@ -7,9 +5,8 @@ async function renderFullNews() {
   container.innerHTML =
     "<p style='color:#ccc'>Loading full AI & Data Engineering feed...</p>";
 
-  // reuse fetchAllArticles via dynamic import
   const module = await import("./ai-news.js");
-  const articles = await module.fetchAllArticles?.();
+  const articles = await module.fetchAllArticles();
 
   if (!articles) {
     container.innerHTML = "<p style='color:#ccc'>Unable to load news.</p>";
@@ -18,7 +15,6 @@ async function renderFullNews() {
 
   container.innerHTML = "";
 
-  // show first 20
   const topN = articles.slice(0, 20);
 
   for (const article of topN) {
