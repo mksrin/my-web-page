@@ -108,25 +108,7 @@ async function fetchRSS(url) {
   return res.json();
 }
 
-async function summarize(text) {
-  const cacheKey = `summary:${text.slice(0, 100)}`;
-  const cached = getCache(cacheKey);
-  if (cached) return cached;
 
-  const res = await fetch(HF_SUMMARY_API, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(HF_TOKEN && { Authorization: `Bearer ${HF_TOKEN}` })
-    },
-    body: JSON.stringify({ inputs: text })
-  });
-
-  const data = await res.json();
-  const summary = data[0]?.summary_text || "Summary unavailable.";
-  setCache(cacheKey, summary);
-  return summary;
-}
 
 async function fetchAllArticles() {
   const cacheKey = "ai-news:articles";
