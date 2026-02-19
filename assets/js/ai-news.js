@@ -34,13 +34,31 @@ export async function fetchAllArticles() {
 const OPENAI_API = "https://api.openai.com/v1/responses";
 const OPENAI_KEY = "YOUR_KEY_HERE"; // optional but recommended
 
+
+function fallbackSummarize(text) {
+  if (!text) return "Summary unavailable.";
+
+  const sentences = text
+    .replace(/<[^>]+>/g, "")
+    .split(/[.!?]/)
+    .map(s => s.trim())
+    .filter(Boolean);
+
+  return sentences.slice(0, 2).join(". ") + ".";
+}
+
+// ---------- CORS‑FRIENDLY SUMMARIZER (OpenAI Responses API) ----------
+
+const OPENAI_API = "https://api.openai.com/v1/responses";
+const OPENAI_KEY = ""; // optional but recommended
+
 export async function summarize(text) {
   try {
     const res = await fetch(OPENAI_API, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${OPENAI_KEY}`
+        ...(OPENAI_KEY && { "Authorization": `Bearer ${OPENAI_KEY}` })
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo-instruct",
@@ -61,14 +79,13 @@ function fallbackSummarize(text) {
   if (!text) return "Summary unavailable.";
 
   const sentences = text
-    .replace(/<[^>]+>/g, "")
+    .replace(/<[^>]+>/g, "") // remove HTML tags
     .split(/[.!?]/)
     .map(s => s.trim())
     .filter(Boolean);
 
   return sentences.slice(0, 2).join(". ") + ".";
 }
-
 
 // RSS feeds
 const AI_NEWS_FEEDS = [
