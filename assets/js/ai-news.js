@@ -110,35 +110,6 @@ async function fetchRSS(url) {
 
 
 
-async function fetchAllArticles() {
-  const cacheKey = "ai-news:articles";
-  const cached = getCache(cacheKey);
-  if (cached) return cached;
-
-  let articles = [];
-  for (const feed of AI_NEWS_FEEDS) {
-    try {
-      const data = await fetchRSS(feed);
-      if (data.items) {
-        articles.push(
-          ...data.items.map((item) => ({
-            title: item.title,
-            link: item.link,
-            description: item.description || "",
-            pubDate: item.pubDate
-          }))
-        );
-      }
-    } catch (e) {
-      console.error("RSS error:", e);
-    }
-  }
-
-  // sort by date desc
-  articles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-  setCache(cacheKey, articles);
-  return articles;
-}
 
 // ---------- HOMEPAGE: TOP 3 NEWS ----------
 
