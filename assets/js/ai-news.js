@@ -31,9 +31,6 @@ export async function fetchAllArticles() {
   return articles;
 }
 
-const OPENAI_API = "https://api.openai.com/v1/responses";
-const OPENAI_KEY = "YOUR_KEY_HERE"; // optional but recommended
-
 
 function fallbackSummarize(text) {
   if (!text) return "Summary unavailable.";
@@ -96,15 +93,6 @@ const AI_NEWS_FEEDS = [
   "https://techcrunch.com/tag/artificial-intelligence/feed/",
   "https://learn.microsoft.com/en-us/fabric/rss.xml"
 ];
-
-// Hugging Face summarizer
-const HF_SUMMARY_API =
-  "https://api-inference.huggingface.co/models/facebook/bart-large-cnn";
-const HF_TOKEN = ""; // optional
-
-// Embedding model (for ranking & clustering – optional, can be added later)
-const HF_EMBEDDING_API =
-  "https://api-inference.huggingface.co/models/sentence-transformers/all-MiniLM-L6-v2";
 
 // Cache TTL (ms)
 const CACHE_TTL = 24 * 60 * 60 * 1000; // 24h
