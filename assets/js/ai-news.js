@@ -31,25 +31,44 @@ export async function fetchAllArticles() {
   return articles;
 }
 
+const OPENAI_API = "https://api.openai.com/v1/responses";
+const OPENAI_KEY = "YOUR_KEY_HERE"; // optional but recommended
+
 export async function summarize(text) {
-  const cacheKey = `summary:${text.slice(0, 100)}`;
-  const cached = getCache(cacheKey);
-  if (cached) return cached;
+  try {
+    const res = await fetch(OPENAI_API, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${OPENAI_KEY}`
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo-instruct",
+        input: `Summarize this in 2–3 sentences:\n\n${text}`
+      })
+    });
 
-  const res = await fetch(HF_SUMMARY_API, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(HF_TOKEN && { Authorization: `Bearer ${HF_TOKEN}` })
-    },
-    body: JSON.stringify({ inputs: text })
-  });
+    const data = await res.json();
+    return data.output_text || fallbackSummarize(text);
 
-  const data = await res.json();
-  const summary = data[0]?.summary_text || "Summary unavailable.";
-  setCache(cacheKey, summary);
-  return summary;
+  } catch (err) {
+    console.error("Primary summarizer failed:", err);
+    return fallbackSummarize(text);
+  }
 }
+
+function fallbackSummarize(text) {
+  if (!text) return "Summary unavailable.";
+
+  const sentences = text
+    .replace(/<[^>]+>/g, "")
+    .split(/[.!?]/)
+    .map(s => s.trim())
+    .filter(Boolean);
+
+  return sentences.slice(0, 2).join(". ") + ".";
+}
+
 
 // RSS feeds
 const AI_NEWS_FEEDS = [
