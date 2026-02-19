@@ -167,17 +167,7 @@ export async function renderWeeklyInsight(containerId) {
   const prompt =
     "Summarise the key themes in this week's AI and data engineering news in 3–4 sentences, and end with one forward-looking insight.";
 
-  const res = await fetch(HF_SUMMARY_API, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(HF_TOKEN && { Authorization: `Bearer ${HF_TOKEN}` })
-    },
-    body: JSON.stringify({ inputs: `${prompt}\n\n${combinedText}` })
-  });
-
-  const data = await res.json();
-  const insight = data[0]?.summary_text || "Insight unavailable.";
+  const insight = await summarize(`${prompt}\n\n${combinedText}`);
 
   container.innerHTML = `
     <h3>Krishna's Weekly Insight</h3>
