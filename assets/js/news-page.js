@@ -1,3 +1,5 @@
+import { fetchAllArticles, summarize } from "./ai-news.js";
+
 async function renderFullNews() {
   const container = document.getElementById("news-list");
   if (!container) return;
@@ -5,9 +7,7 @@ async function renderFullNews() {
   container.innerHTML =
     "<p style='color:#ccc'>Loading full AI & Data Engineering feed...</p>";
 
-  const module = await import("./ai-news.js");
-  const articles = await module.fetchAllArticles();
-
+  const articles = await fetchAllArticles();
   if (!articles) {
     container.innerHTML = "<p style='color:#ccc'>Unable to load news.</p>";
     return;
@@ -18,7 +18,7 @@ async function renderFullNews() {
   const topN = articles.slice(0, 20);
 
   for (const article of topN) {
-    const summary = await module.summarize(
+    const summaryText = await summarize(
       article.description || article.title || ""
     );
 
@@ -27,7 +27,7 @@ async function renderFullNews() {
 
     card.innerHTML = `
       <h3>${article.title}</h3>
-      <p>${summary}</p>
+      <p>${summaryText}</p>
       <small style="color:#888;">${new Date(
         article.pubDate
       ).toLocaleString()}</small><br/>
