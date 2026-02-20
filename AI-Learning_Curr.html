@@ -1,0 +1,654 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Unified AI Learning Curriculum</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #05060a;
+      --card-bg: #0b0d16;
+      --accent: #5b8cff;
+      --accent-soft: rgba(91, 140, 255, 0.18);
+      --accent-strong: #9b5bff;
+      --text-main: #f5f7ff;
+      --text-muted: #a3a7c2;
+      --border-subtle: #1a1d2b;
+      --section-gap: 2.5rem;
+      --card-radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #15182a 0, #05060a 55%);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 2.5rem 1.5rem 3rem;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    header h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      max-width: 650px;
+    }
+
+    .tagline {
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.2rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .meta span {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(10, 12, 22, 0.8);
+    }
+
+    h3.section-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h3.section-title span.index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+
+    .section {
+      margin-bottom: var(--section-gap);
+    }
+
+    .section-intro {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.1rem;
+      max-width: 720px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, rgba(155, 91, 255, 0.12), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(91, 140, 255, 0.12), transparent 55%),
+                  var(--card-bg);
+      border-radius: var(--card-radius);
+      border: 1px solid var(--border-subtle);
+      padding: 1rem 1.1rem 1.1rem;
+    }
+
+    .card h4 {
+      font-size: 0.98rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card small {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .pill {
+      font-size: 0.72rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(155, 91, 255, 0.4);
+      color: var(--accent-strong);
+      background: rgba(10, 8, 20, 0.9);
+    }
+
+    ul {
+      list-style: none;
+      margin-top: 0.3rem;
+      font-size: 0.86rem;
+    }
+
+    ul li {
+      margin-bottom: 0.25rem;
+      position: relative;
+      padding-left: 1.1rem;
+    }
+
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0.2rem;
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
+
+    .source-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .source-label span {
+      color: var(--accent);
+    }
+
+    .flow {
+      margin-top: 1.5rem;
+      padding: 1rem 1.1rem;
+      border-radius: var(--card-radius);
+      border: 1px dashed rgba(91, 140, 255, 0.6);
+      background: rgba(5, 7, 18, 0.9);
+    }
+
+    .flow h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .flow ol {
+      margin-left: 1.1rem;
+      font-size: 0.86rem;
+    }
+
+    .flow ol li {
+      margin-bottom: 0.25rem;
+    }
+
+    .outcomes {
+      margin-top: 1.5rem;
+      padding: 1rem 1.1rem;
+      border-radius: var(--card-radius);
+      border: 1px solid rgba(155, 91, 255, 0.6);
+      background: radial-gradient(circle at top, rgba(155, 91, 255, 0.18), transparent 60%);
+    }
+
+    .outcomes h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .outcomes ul {
+      margin-top: 0.2rem;
+    }
+
+    .credits {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 1rem;
+    }
+
+    .credits strong {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        color: #000000;
+      }
+      .card, .flow, .outcomes {
+        background: #ffffff !important;
+        border-color: #cccccc;
+      }
+      header, .credits {
+        border-color: #cccccc;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Unified AI Learning Curriculum</h1>
+      <h2>A structured, multi-track learning path combining Tamil resources, global YouTube channels, and free learning platforms.</h2>
+      <div class="tagline">AI · Data Engineering · LLMs · RAG · Career Roadmaps</div>
+      <div class="meta">
+        <span>Language: English + Tamil Resources</span>
+        <span>Level: Beginner → Advanced</span>
+        <span>Format: Self-paced · Video + Hands-on</span>
+      </div>
+    </header>
+
+    <!-- 1. Foundations -->
+    <section class="section" id="foundations">
+      <h3 class="section-title">
+        <span class="index">1</span>
+        Foundations of Programming & Data
+      </h3>
+      <p class="section-intro">
+        Build strong fundamentals in Python and SQL before touching AI or LLMs. This layer is non‑negotiable for serious AI and data engineering work.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h4>Python Essentials</h4>
+          <small>Core language, scripting, and data handling</small>
+          <div class="pill-row">
+            <span class="pill">Beginner</span>
+            <span class="pill">Python</span>
+          </div>
+          <ul>
+            <li>12‑Hour Python Masterclass (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>Python for Data Engineering (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>Python Tutorials – <strong>Corey Schafer</strong> (YouTube)</li>
+            <li>Python Full Course – <strong>freeCodeCamp</strong> (YouTube)</li>
+          </ul>
+          <p class="source-label">
+            <span>Free Platforms:</span> freeCodeCamp Python, Kaggle Learn – Python.
+          </p>
+        </div>
+
+        <div class="card">
+          <h4>SQL & Relational Databases</h4>
+          <small>Querying, joins, subqueries, and performance basics</small>
+          <div class="pill-row">
+            <span class="pill">Beginner</span>
+            <span class="pill">SQL</span>
+          </div>
+          <ul>
+            <li>SQL Masterclass (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>Joins & Subqueries in SQL (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>SQL for Data Analysis – <strong>Alex The Analyst</strong> (YouTube)</li>
+            <li>SQL Full Course – <strong>freeCodeCamp</strong> (YouTube)</li>
+          </ul>
+          <p class="source-label">
+            <span>Free Platforms:</span> Mode SQL Tutorial, Khan Academy SQL, W3Schools SQL.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. AI Fundamentals -->
+    <section class="section" id="ai-fundamentals">
+      <h3 class="section-title">
+        <span class="index">2</span>
+        AI & Machine Learning Fundamentals
+      </h3>
+      <p class="section-intro">
+        Understand what AI is, how ML works, and where different roles (data engineer, analyst, scientist) fit in the ecosystem.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h4>Introduction to AI</h4>
+          <small>Concepts, terminology, and mental models</small>
+          <div class="pill-row">
+            <span class="pill">Beginner</span>
+            <span class="pill">AI Concepts</span>
+          </div>
+          <ul>
+            <li>AI Roadmap (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>What is AI? How AI Works (Tamil) – Tamil channels</li>
+            <li>AI Fundamentals – <strong>Microsoft Learn</strong></li>
+            <li>Intro to AI – <strong>Google AI</strong> (Learn AI)</li>
+          </ul>
+          <p class="source-label">
+            <span>Visual Intuition:</span> 3Blue1Brown (Neural Networks series).
+          </p>
+        </div>
+
+        <div class="card">
+          <h4>Machine Learning Basics</h4>
+          <small>Supervised, unsupervised, evaluation, and pipelines</small>
+          <div class="pill-row">
+            <span class="pill">Beginner → Intermediate</span>
+            <span class="pill">ML</span>
+          </div>
+          <ul>
+            <li>Data Engineer vs Data Analyst vs Data Scientist (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>ML Concepts for Beginners (Tamil) – Tamil channels</li>
+            <li>Machine Learning Course – <strong>Andrew Ng</strong> (YouTube / Coursera audit)</li>
+            <li>ML Crash Course – <strong>Google</strong></li>
+            <li>ML Micro-courses – <strong>Kaggle Learn</strong></li>
+          </ul>
+          <p class="source-label">
+            <span>Concept Clarity:</span> StatQuest (ML topics), Krish Naik (end‑to‑end ML).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Modern AI Systems -->
+    <section class="section" id="modern-ai">
+      <h3 class="section-title">
+        <span class="index">3</span>
+        Modern AI Systems: LLMs, Tokenization & RAG
+      </h3>
+      <p class="section-intro">
+        Move from classical ML into modern generative AI: large language models, tokenization, embeddings, and Retrieval Augmented Generation (RAG).
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h4>LLMs & Tokenization</h4>
+          <small>How LLMs represent and process text</small>
+          <div class="pill-row">
+            <span class="pill">Intermediate</span>
+            <span class="pill">LLMs</span>
+          </div>
+          <ul>
+            <li>Train Your Own Tokenizer (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>LLM Basics (Tamil) – AI‑focused Tamil channels</li>
+            <li>LLM Courses – <strong>Hugging Face</strong> (free)</li>
+            <li>LLM Tutorials – <strong>deeplearning.ai</strong> & AssemblyAI (YouTube)</li>
+          </ul>
+          <p class="source-label">
+            <span>Platforms:</span> Hugging Face courses, Microsoft Learn – Generative AI.
+          </p>
+        </div>
+
+        <div class="card">
+          <h4>RAG & Vector Databases</h4>
+          <small>Retrieval Augmented Generation, embeddings, and architecture</small>
+          <div class="pill-row">
+            <span class="pill">Intermediate → Advanced</span>
+            <span class="pill">RAG</span>
+          </div>
+          <ul>
+            <li>Build Your First RAG System (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>RAG Explained: Architecture, Embeddings & Vectors (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>RAG Tutorials – global YouTube (e.g., CodeEmporium, AssemblyAI)</li>
+            <li>Vector DB & RAG – <strong>Hugging Face</strong> and vendor docs (Pinecone, etc.)</li>
+          </ul>
+          <p class="source-label">
+            <span>Focus:</span> architecture diagrams, chunking strategies, retrieval quality, evaluation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Data Engineering -->
+    <section class="section" id="data-engineering">
+      <h3 class="section-title">
+        <span class="index">4</span>
+        Data Engineering for AI
+      </h3>
+      <p class="section-intro">
+        Learn how data is collected, transformed, stored, and served for AI systems—covering data lakes, pipelines, and cloud-native architectures.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h4>Data Lakes & Pipelines</h4>
+          <small>Layers, ingestion, transformation, and governance</small>
+          <div class="pill-row">
+            <span class="pill">Intermediate</span>
+            <span class="pill">Data Engineering</span>
+          </div>
+          <ul>
+            <li>Data Lake & Its 8 Layers (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>Real-time Data Pipelines (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>Data Engineering Concepts – <strong>Data Engineer One</strong>, <strong>Seattle Data Guy</strong></li>
+            <li>DE Architecture – <strong>Andreas Kretz</strong> (YouTube)</li>
+          </ul>
+          <p class="source-label">
+            <span>Platforms:</span> Databricks Academy (free), Microsoft Learn – Data Engineering.
+          </p>
+        </div>
+
+        <div class="card">
+          <h4>Cloud Data Engineering</h4>
+          <small>Azure, vendor lock‑in, and real‑time projects</small>
+          <div class="pill-row">
+            <span class="pill">Intermediate</span>
+            <span class="pill">Cloud</span>
+          </div>
+          <ul>
+            <li>Cloud Data Engineering Exposed – Vendor Lock‑In (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>Azure DE Project Demo (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>Azure Data Engineering – <strong>Microsoft Learn</strong></li>
+            <li>Cloud Skills – <strong>Google Cloud Skills Boost</strong> (free tier)</li>
+          </ul>
+          <p class="source-label">
+            <span>Emphasis:</span> event-driven pipelines, Delta/Parquet, cost and reliability.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Real Projects -->
+    <section class="section" id="projects">
+      <h3 class="section-title">
+        <span class="index">5</span>
+        Real‑World AI + Data Projects
+      </h3>
+      <p class="section-intro">
+        Apply everything through end‑to‑end projects that combine data engineering, analytics, and AI/LLMs in realistic scenarios.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h4>End‑to‑End Analytics & DE Projects</h4>
+          <small>Streaming, batch, dashboards, and insights</small>
+          <div class="pill-row">
+            <span class="pill">Project</span>
+            <span class="pill">Hands-on</span>
+          </div>
+          <ul>
+            <li>Real-Time Analytics Projects (Zomato, Spotify, Instagram, Uber) – <strong>DataEngineeringTamil</strong></li>
+            <li>Azure DE Real-Time Project (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>DE Projects – <strong>CodeBasics</strong>, <strong>Krish Naik</strong> (YouTube)</li>
+            <li>Datasets – <strong>Kaggle</strong>, public GitHub repos</li>
+          </ul>
+          <p class="source-label">
+            <span>Goal:</span> design, build, deploy, and document one full pipeline.
+          </p>
+        </div>
+
+        <div class="card">
+          <h4>AI & LLM Application Projects</h4>
+          <small>Chatbots, RAG apps, and AI-powered tools</small>
+          <div class="pill-row">
+            <span class="pill">Project</span>
+            <span class="pill">LLM</span>
+          </div>
+          <ul>
+            <li>RAG-based Q&A app (Tamil + English resources)</li>
+            <li>LLM App Tutorials – <strong>Nicholas Renotte</strong>, <strong>Krish Naik</strong></li>
+            <li>GenAI Labs – <strong>Microsoft Learn</strong>, <strong>Hugging Face</strong> examples</li>
+            <li>Deploy to cloud (Azure / other) with basic monitoring</li>
+          </ul>
+          <p class="source-label">
+            <span>Deliverable:</span> working demo + README + architecture diagram.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Databases & Performance -->
+    <section class="section" id="databases">
+      <h3 class="section-title">
+        <span class="index">6</span>
+        Databases, Performance & Storage for AI
+      </h3>
+      <p class="section-intro">
+        Learn how storage and query patterns impact AI workloads, especially for feature stores, vector databases, and analytical queries.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h4>Relational Performance & Design</h4>
+          <small>Query optimization and partitioning</small>
+          <div class="pill-row">
+            <span class="pill">Intermediate</span>
+            <span class="pill">Databases</span>
+          </div>
+          <ul>
+            <li>Why SELECT * Can Slow You Down (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>MySQL Partitioning Explained (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>Indexing & Query Tuning – global SQL channels</li>
+          </ul>
+          <p class="source-label">
+            <span>Context:</span> supports scalable analytics and RAG backends.
+          </p>
+        </div>
+
+        <div class="card">
+          <h4>Vector & Hybrid Storage</h4>
+          <small>Vector DBs, hybrid search, and retrieval patterns</small>
+          <div class="pill-row">
+            <span class="pill">Advanced</span>
+            <span class="pill">Vector DB</span>
+          </div>
+          <ul>
+            <li>Vector DB intros – vendor & community YouTube content</li>
+            <li>Hybrid search (BM25 + vectors) – documentation & tutorials</li>
+            <li>Hands-on with at least one vector DB (e.g., open-source)</li>
+          </ul>
+          <p class="source-label">
+            <span>Goal:</span> understand trade-offs between relational, analytical, and vector stores.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Career & Roadmaps -->
+    <section class="section" id="career">
+      <h3 class="section-title">
+        <span class="index">7</span>
+        Career Roadmaps & Continuous Growth
+      </h3>
+      <p class="section-intro">
+        Align your learning with real roles—data engineer, ML engineer, AI engineer—and plan your next 12–24 months with clarity.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h4>Roadmaps & Role Clarity</h4>
+          <small>Choosing and growing into the right role</small>
+          <div class="pill-row">
+            <span class="pill">All Levels</span>
+            <span class="pill">Career</span>
+          </div>
+          <ul>
+            <li>Freshers Roadmap 2025–2026 (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>Who is a Data Engineer? (Tamil) – <strong>DataEngineeringTamil</strong></li>
+            <li>Career Roadmaps – <strong>Alex The Analyst</strong>, <strong>CodeBasics</strong>, <strong>Ken Jee</strong></li>
+          </ul>
+          <p class="source-label">
+            <span>Platforms:</span> Microsoft Learn career paths, Coursera (audit mode), LinkedIn Learning (trial).
+          </p>
+        </div>
+
+        <div class="card">
+          <h4>Portfolio, Projects & Branding</h4>
+          <small>Showcasing your skills with real work</small>
+          <div class="pill-row">
+            <span class="pill">All Levels</span>
+            <span class="pill">Portfolio</span>
+          </div>
+          <ul>
+            <li>Publish 2–3 end‑to‑end projects (DE + AI/LLM)</li>
+            <li>Write short case studies or blog posts per project</li>
+            <li>Host code on GitHub with clean READMEs</li>
+            <li>Share learnings on LinkedIn and personal site</li>
+          </ul>
+          <p class="source-label">
+            <span>Outcome:</span> visible, credible proof of skills for recruiters and clients.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learning Flow -->
+    <section class="flow" id="learning-flow">
+      <h4>Recommended Learning Flow</h4>
+      <ol>
+        <li>Start with <strong>Python + SQL</strong> (Foundations).</li>
+        <li>Move into <strong>AI & ML Fundamentals</strong>.</li>
+        <li>Learn <strong>LLMs, Tokenization & RAG</strong>.</li>
+        <li>Deepen <strong>Data Engineering & Cloud</strong> skills.</li>
+        <li>Build <strong>real‑world projects</strong> (analytics + LLM apps).</li>
+        <li>Optimize <strong>databases & performance</strong> for AI workloads.</li>
+        <li>Shape your <strong>career roadmap & portfolio</strong>.</li>
+      </ol>
+    </section>
+
+    <!-- Outcomes -->
+    <section class="outcomes" id="outcomes">
+      <h4>Curriculum Outcomes</h4>
+      <ul>
+        <li>Solid foundations in Python, SQL, and core data concepts.</li>
+        <li>Clear understanding of AI, ML, LLMs, tokenization, and RAG.</li>
+        <li>Hands-on experience with data pipelines, lakes, and cloud platforms.</li>
+        <li>End‑to‑end project experience across analytics and AI applications.</li>
+        <li>Practical knowledge of database performance and vector storage.</li>
+        <li>A coherent roadmap toward roles in data engineering and AI.</li>
+      </ul>
+    </section>
+
+    <!-- Credits -->
+    <footer class="credits">
+      <p><strong>Primary Tamil Channel:</strong> DataEngineeringTamil – <a href="https://www.youtube.com/@dataengineeringtamil" target="_blank">YouTube</a></p>
+      <p><strong>Global YouTube & Platforms (examples):</strong> freeCodeCamp, Corey Schafer, Krish Naik, CodeBasics, 3Blue1Brown, StatQuest, Microsoft Learn, Google AI, Kaggle Learn, Hugging Face, Databricks Academy, Google Cloud Skills Boost.</p>
+      <p>This HTML can be used directly as a curriculum page or exported as a PDF from your site.</p>
+    </footer>
+  </div>
+</body>
+</html>
+```
