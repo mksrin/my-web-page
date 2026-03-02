@@ -1,20 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>AI & Data Engineering News Hub</title>
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <script type="module" src="./assets/js/news-page.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI News</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+  padding: 20px;
+}
+h1 { text-align: center; }
+.feed {
+  background: white;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.article {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.article:last-child { border-bottom: none; }
+.article a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #1a73e8;
+}
+.date {
+  font-size: 12px;
+  color: gray;
+}
+</style>
 </head>
 <body>
-  <main class="page">
-    <section class="latest-news">
-      <h2 class="latest-news-title">Stay On Top Of The Latest News on AI & Data Engineering</h2>
-      <div id="news-list" class="latest-news-grid"></div>
-    </section>
-  </main>
+
+<h1>AI News</h1>
+<div id="news">Loading feeds...</div>
+
+<script>
+const FEEDS = [
+  { name: "Google AI", url: "https://blog.google/innovation-and-ai/technology/ai/rss/" },
+  { name: "OpenAI", url: "https://openai.com/blog/rss/" },
+  { name: "Hugging Face", url: "https://huggingface.co/blog/feed.xml" },
+  { name: "Databricks", url: "https://databricks.com/feed" },
+  { name: "TechCrunch AI", url: "https://techcrunch.com/tag/artificial-intelligence/feed/" },
+  { name: "Microsoft Fabric", url: "https://learn.microsoft.com/en-us/fabric/rss.xml" }
+];
+
+async function loadFeed(feed) {
+  try {
+    const apiURL =
+      "https://api.rss2json.com/v1/api.json?rss_url=" +
+      encodeURIComponent(feed.url);
+
+    const response = await fetch(apiURL);
+    const data = await response.json();
+
+    if (data.status !== "ok") {
+      console.error("Feed failed:", feed.name);
+      return;
+    }
+
+    const feedDiv = document.createElement("div");
+    feedDiv.className = "feed";
+    feedDiv.innerHTML = `<h2>${feed.name}</h2>`;
+
+    data.items.slice(0, 5).forEach(item => {
+      const article = document.createElement("div");
+      article.className = "article";
+      article.innerHTML = `
+        <a href="${item.link}" target="_blank">${item.title}</a>
+        <div class="date">${item.pubDate}</div>
+      `;
+      feedDiv.appendChild(article);
+    });
+
+    document.getElementById("news").appendChild(feedDiv);
+
+  } catch (err) {
+    console.error("Error loading:", feed.name, err);
+  }
+}
+
+FEEDS.forEach(loadFeed);
+</script>
+
+
 </body>
-
 </html>
-
-
