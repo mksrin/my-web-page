@@ -1,318 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krishna Srinivasan - Senior Data & Analytics Consultant</title>
-    <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #34495e;
-            --accent: #3498db;
-            --text: #333;
-            --light: #f4f7f6;
-            --white: #ffffff;
-        }
+  <meta charset="UTF-8" />
+  <title>Krishna Srinivasan – Data & AI Engineer</title>
+  <style>
+    :root {
+      --primary: #1f4e79;
+      --accent: #0b6fa4;
+      --text-main: #222222;
+      --text-muted: #555555;
+      --border-light: #dddddd;
+      --bg-light: #f5f7fa;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background-color: var(--light);
-            padding: 20px;
-        }
+    body {
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+      background: #e5e5e5;
+      color: var(--text-main);
+      padding: 30px 0;
+    }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--white);
-            padding: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
+    .page {
+      width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+      padding: 32px 40px 40px;
+    }
 
-        header {
-            border-bottom: 3px solid var(--accent);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
+    /* Header */
+    .header {
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
 
-        h1 {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-        }
+    .name {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
+    .title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
 
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            font-size: 0.9rem;
-        }
+    .contact {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
 
-        .contact-info a {
-            color: var(--accent);
-            text-decoration: none;
-        }
+    .contact span {
+      border-right: 1px solid var(--border-light);
+      padding-right: 10px;
+      margin-right: 0;
+    }
 
-        section {
-            margin-bottom: 30px;
-        }
+    .contact span:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
 
-        h2 {
-            color: var(--primary);
-            border-left: 5px solid var(--accent);
-            padding-left: 10px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            font-size: 1.3rem;
-        }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
 
-        .philosophy {
-            font-style: italic;
-            background: #eef2f3;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
+    a:hover {
+      text-decoration: underline;
+    }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
+    /* Sections */
+    .section {
+      margin-top: 18px;
+    }
 
-        .skill-category {
-            background: #fff;
-            border: 1px solid #ddd;
-            padding: 15px;
-            border-radius: 4px;
-        }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--primary);
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
 
-        .skill-category h3 {
-            font-size: 1rem;
-            margin-bottom: 10px;
-            color: var(--accent);
-        }
+    .section-body {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-main);
+    }
 
-        .experience-item {
-            margin-bottom: 25px;
-        }
+    .summary-text {
+      text-align: justify;
+    }
 
-        .exp-header {
-            display: flex;
-            justify-content: space-between;
-            font-weight: bold;
-            color: var(--primary);
-        }
+    /* Two-column capability table */
+    .capabilities-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      font-size: 12px;
+    }
 
-        .job-title {
-            color: var(--accent);
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+    .capabilities-table th,
+    .capabilities-table td {
+      vertical-align: top;
+      padding: 8px 10px;
+      border: 1px solid var(--border-light);
+    }
 
-        ul {
-            list-style-position: outside;
-            margin-left: 20px;
-        }
+    .capabilities-table th {
+      background: var(--bg-light);
+      font-weight: 700;
+      color: var(--primary);
+      text-align: left;
+      font-size: 12px;
+    }
 
-        li {
-            margin-bottom: 5px;
-        }
+    /* Experience */
+    .role {
+      margin-top: 10px;
+    }
 
-        .edu-item {
-            margin-bottom: 15px;
-        }
+    .role-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
 
-        .edu-degree {
-            font-weight: bold;
-        }
+    .role-title {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text-main);
+    }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
+    .role-company {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+    }
 
-            .exp-header {
-                flex-direction: column;
-            }
-        }
-    </style>
+    .role-dates {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .role-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+
+    .role-list {
+      margin-left: 16px;
+      margin-top: 4px;
+    }
+
+    .role-list li {
+      margin-bottom: 3px;
+    }
+
+    /* Technical skills table */
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      font-size: 12px;
+    }
+
+    .skills-table th,
+    .skills-table td {
+      border: 1px solid var(--border-light);
+      padding: 6px 8px;
+      vertical-align: top;
+    }
+
+    .skills-table th {
+      width: 22%;
+      background: var(--bg-light);
+      font-weight: 700;
+      color: var(--primary);
+      text-align: left;
+      font-size: 12px;
+    }
+
+    .skills-table td {
+      width: 78%;
+    }
+
+    /* Education & additional */
+    .edu-item,
+    .additional-item {
+      margin-top: 4px;
+      font-size: 13px;
+    }
+
+    .edu-degree {
+      font-weight: 600;
+    }
+
+    .edu-inst {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .additional-item {
+      font-size: 12px;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-    <header>
-        <h1>Krishna Srinivasan</h1>
-        <div class="subtitle">
-            Senior Data &amp; Analytics Consultant | Data Engineering &amp; Enterprise Platforms
-        </div>
-        <div class="contact-info">
-            <span>Livingston, United Kingdom</span>
-            <a href="mailto:mksrin@live.co.uk">mksrin@live.co.uk</a>
-            <span>+44 7482 965565</span>
-            <a href="https://www.linkedin.com/in/mksrin">LinkedIn Profile</a>
-        </div>
+  <div class="page">
+    <!-- Header -->
+    <header class="header">
+      <div class="name">KRISHNA SRINIVASAN</div>
+      <div class="title">Data &amp; AI Engineer | LLM Solutions | Cloud Architecture | Consulting</div>
+      <div class="contact">
+        <span>United Kingdom</span>
+        <span><a href="mailto:mksrin@live.co.uk">mksrin@live.co.uk</a></span>
+        <span>+44 7482 965565</span>
+        <span><a href="https://linkedin.com/in/mksrin" target="_blank">linkedin.com/in/mksrin</a></span>
+      </div>
     </header>
 
-    <section>
-        <h2>Professional Profile</h2>
-        <div class="philosophy">
-            “My professional philosophy is centred on the ‘Analytical Toolkit’—a conviction that the combination of Python,
-            PySpark, and SQL forms the essential backbone for navigating and resolving technical ambiguity in enterprise
-            environments.”
-        </div>
-        <p>
-            I am a Senior Data &amp; Analytics Consultant with a career spanning two decades of technical excellence and
-            strategic delivery. I bridge the gap between raw engineering and corporate strategy by ensuring every platform
-            is not only high-performing but also governed by rigorous standards. I am a specialist in Microsoft Purview and
-            automated governance, ensuring that data lineage and cataloguing are integrated into the architecture rather
-            than treated as afterthoughts. I am dedicated to the industrialisation of data, transforming experimental AI and
-            fragmented legacy systems into robust, production-ready assets.
-        </p>
+    <!-- Professional summary -->
+    <section class="section">
+      <div class="section-title">Professional summary</div>
+      <div class="section-body summary-text">
+        Senior Data &amp; AI Engineer with deep expertise designing and deploying production-grade AI solutions across financial services,
+        retail, and public sector clients. Proven track record delivering end-to-end LLM applications, including semantic search, document
+        intelligence, and NLP pipelines, using both open-source models (LLaMA, Mistral, Qwen, Gemma, Phi-3) and commercial APIs (OpenAI,
+        Cohere). Experienced in bridging data science and software engineering within fast-paced consulting environments, translating
+        ambiguous business challenges into scalable, governed AI platforms on Azure, Databricks, and Microsoft Fabric.
+        Recognised technical leader with a history of mentoring engineers, leading architecture workshops, and supporting business
+        development conversations on AI and ML. Eligible and experienced working in environments requiring security clearance.
+      </div>
     </section>
 
-    <section>
-        <h2>Full Technical Matrix</h2>
-        <div class="skills-grid">
-            <div class="skill-category">
-                <h3>Programming &amp; Analytics</h3>
-                <p>Python (Pandas, NumPy, Scikit-Learn, PySpark), R, SQL, Bash.</p>
-            </div>
-            <div class="skill-category">
-                <h3>Big Data &amp; Distributed Systems</h3>
-                <p>Apache Spark/PySpark, Hadoop, Hive, Kafka.</p>
-            </div>
-            <div class="skill-category">
-                <h3>Cloud Platforms</h3>
-                <p>Microsoft Fabric, Azure Data Factory (ADF), Databricks, Azure Data Lake, AWS.</p>
-            </div>
-            <div class="skill-category">
-                <h3>ETL, Migration &amp; Integration</h3>
-                <p>SSIS, ADF, Data Mapping, Cleansing, API Integration, Synapse Link.</p>
-            </div>
-            <div class="skill-category">
-                <h3>Enterprise Governance &amp; Intelligence</h3>
-                <p>Microsoft Purview, Data Quality Frameworks, Metadata Management, Microsoft Presidio.</p>
-            </div>
-            <div class="skill-category">
-                <h3>AI &amp; ML Operations</h3>
-                <p>Scaling Local LLMs (Mistral, Qwen, DeepSeek, Gemma, LLaMA, Phi-3), Spark-based NLP.</p>
-            </div>
-            <div class="skill-category">
-                <h3>Reporting &amp; Visualisation</h3>
-                <p>Power BI, Excel, SQL Reporting Services (SSRS).</p>
-            </div>
-            <div class="skill-category">
-                <h3>Professional Leadership</h3>
-                <p>Agile Delivery, Solution Architecture, Technical Mentorship, Stakeholder Management, Distributed Team Leadership, Migration Strategy.</p>
-            </div>
-        </div>
+    <!-- Core capabilities -->
+    <section class="section">
+      <div class="section-title">Core capabilities</div>
+      <div class="section-body">
+        <table class="capabilities-table">
+          <tr>
+            <th>
+              AI &amp; LLM Engineering<br />
+              LLM deployment: Mistral, LLaMA, Qwen, DeepSeek, Gemma, Phi-3<br />
+              LangChain, vector databases, agentic AI systems<br />
+              RAG pipelines, semantic search, chatbot development<br />
+              OpenAI &amp; open-source model APIs
+            </th>
+            <th>
+              Cloud &amp; MLOps<br />
+              Azure ML, Databricks, Microsoft Fabric, ADF<br />
+              SageMaker, Vertex AI (GCP), Azure Data Lake<br />
+              CI/CD pipelines, Terraform (IaC), MLOps principles<br />
+              Event-driven architectures, CosmosDB, Service Bus
+            </th>
+          </tr>
+          <tr>
+            <td>
+              Data Engineering &amp; Platforms<br />
+              Apache Spark, PySpark, Delta Lake, SSIS<br />
+              Python (advanced), SQL, Bash scripting<br />
+              Batch &amp; streaming pipelines, data quality frameworks<br />
+              Lakehouse architectures, data governance &amp; lineage
+            </td>
+            <td>
+              Consulting &amp; Technical Leadership<br />
+              Solution architecture &amp; executive advisory<br />
+              Team mentoring, Agile delivery, stakeholder management<br />
+              Business requirements to AI solution translation<br />
+              AI/ML business development conversations
+            </td>
+          </tr>
+        </table>
+      </div>
     </section>
 
-    <section>
-        <h2>Professional Experience</h2>
+    <!-- Professional experience -->
+    <section class="section">
+      <div class="section-title">Professional experience</div>
+      <div class="section-body">
 
-        <div class="experience-item">
-            <div class="exp-header">
-                <span>Kerv / cloudThing</span>
-                <span>2021 – Present</span>
+        <!-- Kerv / cloudThing -->
+        <div class="role">
+          <div class="role-header">
+            <div>
+              <div class="role-title">Senior Data &amp; AI Engineering Consultant</div>
+              <div class="role-company">Kerv / cloudThing</div>
             </div>
-            <div class="job-title">Senior Data Engineering Analyst</div>
-            <ul>
-                <li>Designed comprehensive end-to-end Azure data architectures, managing the full lifecycle of ingestion, transformation, storage, and consumption layers.</li>
-                <li>Facilitated solution design workshops to translate complex business needs into architectural blueprints and actionable delivery roadmaps for enterprise clients.</li>
-                <li>Produced executive-ready documentation, including migration playbooks and architecture diagrams, to guide corporate decision-making and ensure technical transparency.</li>
-                <li>Successfully industrialised local Large Language Models (LLaMA, Phi-3, Mistral, Qwen, DeepSeek, and Gemma) using Apache Spark, enabling high-performance NLP at enterprise scale.</li>
-                <li>Designed and deployed automated PII anonymisation workflows using Microsoft Presidio on Apache Spark, ensuring regulatory compliance during large-scale data movements.</li>
-                <li>Architected event-driven systems using Azure Service Bus to synchronise D365 with legacy environments, utilising CosmosDB for high-performance, real-time logging.</li>
-                <li>Leveraged Synapse Link for D365 to facilitate efficient, high-volume data movement into SQL and Synapse Analytics environments.</li>
-                <li>Orchestrated large-scale migration of legacy Databricks and SQL Server data into D365 platforms using SSIS and bespoke mapping protocols.</li>
-                <li>Optimised pipeline performance through advanced Spark partitioning strategies, Z-Ordering, and compaction to manage high-volume enterprise workloads.</li>
-                <li>Implemented Delta Lake best practices, ensuring ACID transactions and schema evolution across all lakehouse patterns.</li>
-                <li>Established observability frameworks, incorporating automated validation rules, logging, and alerting systems to ensure data reliability.</li>
-            </ul>
+            <div class="role-dates">2021 – Present</div>
+          </div>
+          <div class="role-subtitle">
+            Lead architect and AI engineering consultant delivering cloud-native data platforms and LLM-powered analytics solutions for
+            public sector and commercial clients. Operating as a trusted technical advisor from discovery through to production deployment.
+          </div>
+          <ul class="role-list">
+            <li>Industrialised local LLMs (Mistral, Qwen, DeepSeek, LLaMA, Phi-3) using Apache Spark, enabling scalable document processing, semantic search, and NLP capabilities for enterprise clients.</li>
+            <li>Designed and deployed end-to-end RAG pipelines integrating vector search with LLM inference layers, forming the basis of internal chatbot and content generation systems.</li>
+            <li>Built automated PII anonymisation pipelines leveraging Microsoft Presidio integrated with Spark — demonstrating responsible AI and data governance in production environments.</li>
+            <li>Architected Azure-native data platforms covering ingestion (ADF), transformation (Databricks/Spark), storage (ADLS, Delta Lake), and consumption layers — with full lineage and observability.</li>
+            <li>Implemented MLOps-aligned deployment patterns: CI/CD pipelines, automated validation, logging and alerting for production-grade AI model reliability.</li>
+            <li>Delivered high-volume data migrations and integration frameworks using SSIS, D365, and custom mapping pipelines across complex multi-system environments.</li>
+            <li>Facilitated architecture workshops and produced executive-ready design artefacts, roadmaps, and AI governance models — directly supporting business development.</li>
+            <li>Mentored junior engineers across Python, SQL, cloud engineering, and LLM tooling; established team coding standards and review processes.</li>
+          </ul>
         </div>
 
-        <div class="experience-item">
-            <div class="exp-header">
-                <span>Deloitte (CYBG)</span>
-                <span>2018 – 2020</span>
+        <!-- Deloitte -->
+        <div class="role">
+          <div class="role-header">
+            <div>
+              <div class="role-title">Data Analyst</div>
+              <div class="role-company">Deloitte (CYBG / Virgin Money)</div>
             </div>
-            <div class="job-title">Data Analyst</div>
-            <ul>
-                <li>Extracted, cleansed, and validated large-scale financial datasets to support critical transformation and regulatory programmes for a major banking client.</li>
-                <li>Developed Python and SQL-based automation scripts for data quality and reconciliation, significantly reducing manual intervention and error rates in compliance reporting.</li>
-                <li>Delivered data-led recommendations and insight-driven analysis to senior stakeholders across operational and commercial workstreams.</li>
-            </ul>
+            <div class="role-dates">2018 – 2020</div>
+          </div>
+          <div class="role-subtitle">
+            Delivered analytical and engineering support for regulatory and digital transformation programmes within a major UK financial institution.
+          </div>
+          <ul class="role-list">
+            <li>Built automated Python and SQL pipelines for data quality, reconciliation, and regulatory reporting — reducing manual effort and improving accuracy.</li>
+            <li>Conducted deep-dive analysis on commercial and operational datasets to support strategic stakeholder decision-making.</li>
+            <li>Partnered with senior stakeholders to translate complex business requirements into scalable, auditable data solutions.</li>
+          </ul>
         </div>
 
-        <div class="experience-item">
-            <div class="exp-header">
-                <span>Sainsbury’s Bank &amp; Lloyds Banking Group</span>
-                <span>2018</span>
+        <!-- Sainsbury's & Lloyds -->
+        <div class="role">
+          <div class="role-header">
+            <div>
+              <div class="role-title">Data Engineer</div>
+              <div class="role-company">Sainsbury's Bank &amp; Lloyds Banking Group</div>
             </div>
-            <div class="job-title">Data Engineer</div>
-            <ul>
-                <li>Developed Spark-based batch processing pipelines to streamline and accelerate credit card onboarding workflows.</li>
-                <li>Integrated various APIs and internal systems to produce validated, production-ready datasets for downstream fulfilment and embossing processes.</li>
-                <li>Engineered robust validation logic to ensure data integrity across all ingestion and transformation stages.</li>
-            </ul>
+            <div class="role-dates">2018</div>
+          </div>
+          <ul class="role-list">
+            <li>Developed Spark-based batch pipelines with robust validation logic supporting credit card onboarding and fulfilment.</li>
+            <li>Integrated APIs and internal systems to deliver high-quality, governed datasets for downstream operational use.</li>
+          </ul>
         </div>
 
-        <div class="experience-item">
-            <div class="exp-header">
-                <span>IBM</span>
-                <span>2006 – 2015</span>
+        <!-- IBM -->
+        <div class="role">
+          <div class="role-header">
+            <div>
+              <div class="role-title">Delivery Manager</div>
+              <div class="role-company">IBM</div>
             </div>
-            <div class="job-title">Delivery Manager</div>
-            <ul>
-                <li>Oversaw end-to-end enterprise data migration programmes, ensuring projects remained on schedule, within budget, and aligned with technical specifications.</li>
-                <li>Designed comprehensive migration, validation, and reconciliation strategies to maintain 100% data fidelity during complex system transitions.</li>
-                <li>Led and coordinated distributed engineering teams, governing delivery quality across multi-supplier and global environments.</li>
-            </ul>
+            <div class="role-dates">2006 – 2015</div>
+          </div>
+          <ul class="role-list">
+            <li>Led global delivery teams on large-scale data migration and transformation programmes.</li>
+            <li>Designed migration strategies ensuring accuracy, completeness, and operational continuity across distributed environments.</li>
+            <li>Managed multi-supplier engineering teams with a focus on governance, quality, and stakeholder alignment.</li>
+          </ul>
         </div>
+      </div>
     </section>
 
-    <section>
-        <h2>Education &amp; Professional Development</h2>
-        <div class="edu-item">
-            <div class="edu-degree">Post Graduate Diploma in Advanced Security &amp; Digital Forensics</div>
-            <div>Edinburgh Napier University (2017)</div>
-        </div>
-        <div class="edu-item">
-            <div class="edu-degree">Master of Computer Applications (MCA)</div>
-            <div>Madurai Kamaraj University (2003)</div>
-        </div>
-        <div class="edu-item">
-            <div class="edu-degree">Bachelor of Science (B.Sc.) in Computer Science</div>
-            <div>Manonmaniam Sundaranar University (1997)</div>
-        </div>
-    </section>
-
-    <section>
-        <h2>Mentorship &amp; Contributions</h2>
-        <ul>
-            <li>Actively mentor junior engineers in Python, SQL, cloud engineering, and data modelling to build high-performing, technical-first teams.</li>
-            <li>Contributed to the design of enterprise ingestion frameworks and the evolution of lakehouse patterns across the organisation.</li>
-            <li>Developed rule-based validation scripts and implemented Microsoft Purview workflows to improve data lineage, cataloguing, and enterprise transparency.</li>
-        </ul>
-    </section>
-</div>
-</body>
-</html>
+    <!-- Technical skills -->
+    <section class="section">
+      <div class="section-title">Technical skills</div>
+      <div class="section-body">
+        <table class="skills-table">
+          <tr>
+            <th>Languages</th>
+            <td>Python (advanced), SQL, Bash</td>
+          </tr>
+          <tr>
+            <th>AI / LLM</th>
+            <td>LangChain, OpenAI API, Cohere, Mistral, LLaMA, Qwen, DeepSeek, Gemma, Phi-3; RAG, vector databases, agentic AI</td>
+          </tr>
+          <tr>
+            <th>Cloud &amp; ML</th>
+            <td>Azure ML, Databricks, Microsoft Fabric, ADF, ADLS, CosmosDB; AWS SageMaker, GCP Vertex AI</td>
+          </tr>
+          <tr>
+            <th>Data Engineering</th>
+            <td>Apache Spark, PySpark, Delta Lake, SSIS, Apache Kafka concepts, batch &amp; streaming pipelines</td>
